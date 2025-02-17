@@ -1,0 +1,102 @@
+# Cyclistic Case Study
+
+## ASK Phase
+
+### Business Questions
+- How do casual and annual riders use Cyclistic bikes differently?
+- How can your findings drive business decisions to convert casual riders into annual members?
+
+### Business Tasks
+The goal of this analysis is to understand how casual riders and annual members differ in their use of Cyclistic bikes.  This information will guide marketing strategies to encourage casual riders to become annual members.
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Load necessary libraries
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+
+# Set working directory
+setwd("~/Cyclistic_Case_Study/new_path")
+
+# Define the correct folder path
+data_folder <- "~/Cyclistic_Case_Study/new_path"
+
+# List all CSV files in the folder
+csv_files <- list.files(data_folder, full.names = TRUE, pattern = "*.csv")
+
+# Load all CSV files efficiently, selecting only the necessary columns
+needed_columns <- c("started_at", "ended_at", "member_casual", "rideable_type")
+
+dataset <- rbindlist(lapply(csv_files, function(file) {
+    fread(file, select = needed_columns, fill = TRUE, colClasses = "character")
+}), fill = TRUE)
+
+# Convert timestamps to proper datetime format
+dataset$started_at <- as.POSIXct(dataset$started_at, format="%Y-%m-%d %H:%M:%S", tz="UTC")
+dataset$ended_at <- as.POSIXct(dataset$ended_at, format="%Y-%m-%d %H:%M:%S", tz="UTC")
+
+# Create new time-related columns
+dataset <- dataset %>%
+  mutate(
+    trip_duration = as.numeric(difftime(ended_at, started_at, units = "mins")),
+    day_of_week = factor(wday(started_at), 
+                     levels = c(1, 2, 3, 4, 5, 6, 7), 
+                     labels = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")),
+    hour_of_day = hour(started_at)
+  )
+
+# Filter out unrealistic trip durations (less than 1 min or over 100 min)
+dataset <- dataset %>% filter(trip_duration >= 1 & trip_duration <= 100)
+
+# Summary statistics to verify dataset
+summary(dataset$trip_duration)
+table(dataset$member_casual)
+
+# Plot: Compare trip duration between casual and member riders
+ggplot(dataset, aes(x = member_casual, y = trip_duration, fill = member_casual)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Trip Duration by Membership Type", x = "Membership Type", y = "Trip Duration (minutes)")
+
+# Plot: Number of rides per day of the week
+ggplot(dataset, aes(x = day_of_week, fill = member_casual)) +
+  geom_bar(position = "dodge") +
+  theme_minimal() +
+  labs(title = "Rides by Day of the Week", x = "Day of the Week", y = "Ride Count")
+
+# Plot: Number of rides per hour of the day
+ggplot(dataset, aes(x = hour_of_day, fill = member_casual)) +
+  geom_histogram(binwidth = 1, position = "dodge") +
+  theme_minimal() +
+  labs(title = "Rides by Hour of the Day", x = "Hour of the Day", y = "Ride Count")
+
+
+```
+
+
+
+
+### Analysis
+
+The data visualization highlights clear differences between casual riders and annual members in their usage of Cyclistic bikes.
+
+- Trip Duration:
+The boxplot indicates that casual riders tend to take longer trips on average compared to annual members. The variability in trip durations is also greater for casual riders, suggesting more diverse trip purposes, likely for leisure or recreation. In contrast, annual members have more consistent and shorter trip durations, which may indicate habitual use for commuting or daily activities.
+
+- Rides by Day of the Week:
+The bar chart reveals that annual members consistently ride more frequently than casual riders on weekdays, especially from Monday to Friday. This pattern suggests that members are using the service as a reliable part of their daily routine, likely for work or other commitments. However, casual riders show a significant increase in ridership on weekends, implying recreational or social use.
+
+- Rides by Hour of the Day:
+The histogram demonstrates a clear peak in ride activity during morning and evening rush hours, predominantly among annual members. This aligns with the assumption that members use the service for commuting. Casual riders, however, display a more spread-out distribution throughout the day, with activity rising later in the morning and remaining steady into the afternoon, further supporting the idea of recreational use.
+
+### Conclusions
+
+This analysis provides key insights into how Cyclistic’s ridership patterns differ between casual and annual members:
+
+- Casual riders tend to take longer trips and ride more on weekends, likely for leisure, tourism, or social outings.
+- Annual members take shorter, more frequent trips, with peak usage during weekday commuting hours, emphasizing their reliance on the service for daily transportation.
+- To increase membership conversions, Cyclistic should focus on marketing strategies that appeal to casual riders' existing habits—for example:
+- Promoting membership as a cost-effective option for frequent weekend riders.
+--Offering incentives or discounts for those who ride consistently over time.
+- Highlighting the convenience of membership for everyday commutes to attract casual users who might benefit from regular use.
+By tailoring campaigns that emphasize both the financial and practical benefits of membership, Cyclistic can encourage more casual riders to transition into committed annual members.

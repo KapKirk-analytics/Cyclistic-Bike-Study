@@ -6,7 +6,7 @@ This project analyzes a subset of the Divvy bike-sharing dataset to identify tre
 ## Dataset Information
 The data for this project was sourced from Divvy Bike Data. The full dataset is available at the following link:
 
-[DIVVY BIKE DATA](https://divvy-tripdata.s3.amazonaws.com/)
+[View Cyclistic Case Study Output (HTML)](cyclistic_case_study.html)
 
 
 This dataset contains multiple years of bike-sharing trip records. However, this analysis focuses on a one-year subset.

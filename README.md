@@ -1,5 +1,6 @@
 # Capstone Project: Divvy Bike Data Analysis 🚲
-
+**_PLEASE CLICK THIS LINK TO VIEW PROPERLY_**
+[Link to GitHub Page](https://kapkirk-analytics.github.io/Kap-Data-Portfolio/)
 ### Project Overview
 This project analyzes a subset of the Divvy bike-sharing dataset to identify trends, user behaviors, and potential insights for business decision-making.
 
@@ -11,7 +12,7 @@ The data for this project was sourced from Divvy Bike Data. Unfortunately, due t
 1. **View the Cyclistic Case Study Output**  
    To see the project output, click the following link to view the HTML page generated from the R Markdown file:
 
-   [View Cyclistic Case Study Output (HTML)](https://kapkirk-analytics.github.io/Kap-Data-Portfolio/)
+   [View Cyclistic Case Study Output (HTML)](Cyclistic_Case_Study)
 
 2. **Review the R Markdown Code**  
    To review the code behind the analysis, you can click the `.Rmd` file in this repository:  

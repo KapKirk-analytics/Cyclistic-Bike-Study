@@ -11,7 +11,7 @@ The data for this project was sourced from Divvy Bike Data. Unfortunately, due t
 1. **View the Cyclistic Case Study Output**  
    To see the project output, click the following link to view the HTML page generated from the R Markdown file:
 
-   [View Cyclistic Case Study Output (HTML)](https://<your-username>.github.io/<repository-name>/)
+   [View Cyclistic Case Study Output (HTML)](https://kapkirk-analytics.github.io/Kap-Data-Portfolio/)
 
 2. **Review the R Markdown Code**  
    To review the code behind the analysis, you can click the `.Rmd` file in this repository:  

@@ -3,10 +3,9 @@
 ### Project Overview
 This project analyzes a subset of the Divvy bike-sharing dataset to identify trends, user behaviors, and potential insights for business decision-making.
 
-Dataset Information
+## Dataset Information
 The data for this project was sourced from Divvy Bike Data. The full dataset is available at the following link:
 
-## Dataset Used
 [DIVVY BIKE DATA](https://divvy-tripdata.s3.amazonaws.com/)
 
 
@@ -19,4 +18,4 @@ This dataset contains multiple years of bike-sharing trip records. However, this
 
 ## Project Files
 Capstone_Analysis.Rmd → R Markdown file containing the analysis and visualizations.
-OVERVIEW.md → This file explaining the project structure and dataset details.
+README.md → This file explaining the project structure and dataset details.

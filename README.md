@@ -1,6 +1,6 @@
 # Capstone Project: Divvy Bike Data Analysis 🚲
 **_PLEASE CLICK THIS LINK TO VIEW PROPERLY_**
-[Link to GitHub Page](https://kapkirk-analytics.github.io/Kap-Data-Portfolio/)
+[Link to GitHub Page](https://kapkirk-analytics.github.io/Cyclistic-Bike-Study/)
 ### Project Overview
 This project analyzes a subset of the Divvy bike-sharing dataset to identify trends, user behaviors, and potential insights for business decision-making.
 
